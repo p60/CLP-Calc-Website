@@ -7,8 +7,7 @@ var calculatorApp = {};
 
     start: function() {
 
-      var values = window.location.hash.split('|'),
-          template = _.template($('#template').html()),
+      var template = _.template($('#template').html()),
           self = this,
           sliderOptions,
           sliderEle;
@@ -23,25 +22,25 @@ var calculatorApp = {};
       });
 
       this.createToggle();
-
-      calc.calculate();
     },
 
     createSlider: function(index, ele) {
       var sliderEle = $(ele),
+          values = window.location.hash.split('|'),
           sliderOptions = {
             element: sliderEle,
             min: parseInt(sliderEle.find('.min').text()),
             max: parseInt(sliderEle.find('.max').text())
           },
-          slider;
+          slider,
+          sliderView;
 
       if(window.location.hash) {
-        _.extend(sliderOptions, { value: parseInt(values[index]) });
+        _.extend(sliderOptions, { value: parseInt(values[index].replace(/#/, '')) });
       }
 
       slider = new CLPSlider(sliderOptions);
-      new SliderUI({ model: slider, el: sliderEle });
+      sliderView = new SliderUI({ model: slider, el: sliderEle });
 
       slider.bind('newValue', function(value) {
         //Set the value from the slider on to the calculator
@@ -52,7 +51,7 @@ var calculatorApp = {};
       });
 
       if(window.location.hash) {
-        slider.trigger('newValue', slider.control.slider('value'));
+        slider.trigger('newValue', sliderView.control.slider('value'));
       }
     },
 

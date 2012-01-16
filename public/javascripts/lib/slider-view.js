@@ -1,12 +1,12 @@
 var SliderUI = Backbone.View.extend({
   tagName: "div",
   className: ".slider",
-
+  control: {},
   initialize: function() {
     var self = this;
 
     //Set Up the JQuery UI Slider
-    this.el.find('div').slider({
+    this.control = this.el.find('div').slider({
       min: this.model.get('min'),
       max: this.model.get('max'),
       value: this.model.get('value'),
