@@ -10,6 +10,7 @@ html
         "/javascripts/vendor/jquery-ui.min.js",
         "/javascripts/vendor/underscore.js",
         "/javascripts/vendor/backbone.js",
+        "/javascripts/vendor/handlebars.js",
         "/javascripts/lib/calc.js",
         "/javascripts/lib/price-view.js",
         "/javascripts/lib/slider.js",
@@ -65,10 +66,8 @@ html
         .box
           p Surveys per customer per year
           ul.switch
-            li.selected
-              a 2
-            li
-              a 4
+            li.selected 2
+            li 4
 
     section id="bottom"
 
@@ -96,6 +95,7 @@ html
           p
             | Surveys are garthered on a per quarter basis.
               Your cusomter base will be asked for feed back {{ frequency }} times a year.
+          | {{#if detailed }}
           #divide
             p We devide your customer base into two equal groups
             .box
@@ -144,4 +144,5 @@ html
                   br
                   | @ {{ responseRate }}% =
                   b {{ surveys }} surveys
+            | {{/if}}
     footer

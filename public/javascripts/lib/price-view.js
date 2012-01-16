@@ -3,7 +3,7 @@ var PriceView = Backbone.View.extend({
   id: "bottom",
 
   initialize: function() {
-    this.template = _.template($('#template').html());
+    this.template = Handlebars.compile($('#template').html());
     this.model.bind('showResults', function() {
       this.render()
     }, this);
@@ -13,7 +13,8 @@ var PriceView = Backbone.View.extend({
     var data = _.extend(this.model.toJSON(), {
       surveys: this.model.perQuarterSurveySize(),
       cost: this.model.perQuarterCost(),
-      customers : this.model.perQuarterGroupSize()
+      customers : this.model.perQuarterGroupSize(),
+      detailed: this.model.get('frequency') === 2
     });
     this.el.html(this.template(data));
   }

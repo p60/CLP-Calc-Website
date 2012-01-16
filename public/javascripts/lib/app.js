@@ -1,7 +1,3 @@
-_.templateSettings = {
-    interpolate : /\{\{(.+?)\}\}/g
-};
-
 var calculatorApp = {};
 
 (function($, undefined) {
@@ -25,6 +21,8 @@ var calculatorApp = {};
       $('.slider').each(function(index, ele) {
         self.createSlider(index, ele);
       });
+
+      this.createToggle();
 
       calc.calculate();
     },
@@ -56,6 +54,17 @@ var calculatorApp = {};
       if(window.location.hash) {
         slider.trigger('newValue', slider.control.slider('value'));
       }
+    },
+
+    createToggle: function() {
+      $('.switch li').click(function() {
+        var el = $(this);
+        if(!el.hasClass('selected')) {
+          el.siblings().removeClass('selected');
+          el.addClass('selected');
+          calc.set({ frequency: parseInt(el.text()) });
+        }
+      });
     }
   };
 })(jQuery);
