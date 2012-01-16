@@ -1,0 +1,148 @@
+doctype 5
+html
+  head
+    title = @title
+    link rel="stylesheet" href="/styles/main.css" type="text/css"
+    link rel="stylesheet" href="/stylesheets/jquery-ui.css" type="text/css"
+    script type="text/javascript" src="/javascripts/vendor/head.js"
+    javascript:
+      head.js(
+        "/javascripts/vendor/jquery.js",
+        "/javascripts/vendor/jquery-ui.min.js",
+        "/javascripts/vendor/underscore.js",
+        "/javascripts/vendor/backbone.js",
+        "/javascripts/lib/calc.js",
+        "/javascripts/lib/price-view.js",
+        "/javascripts/lib/slider.js",
+        "/javascripts/lib/slider-view.js",
+        "/javascripts/lib/app.js",
+        function() {
+          $(function() {
+            calculatorApp.start();
+          });
+        });
+  body
+    header
+      a href="http://katalusadvisors.com"
+        span KATALUS Advisors
+      h1 = @title
+
+    section#top
+      .customer-base
+        .box
+          header
+            h2 Size of Customer Base
+          p
+            img src="images/group.png"
+            span 
+              | How many customers do you have accross all the product lines 
+              that you are going to include in the program?
+          div class="slider" data-slider-step="50" data-slider-name="customerBase"
+            span.min 0
+            span.max 2000
+            span.value
+              span
+              span.arrow
+            div
+
+      .response-rate
+        .box
+          header
+            h2 Response Rate
+          p
+            img src="images/survey.png"
+            span
+              | What percentage of you customer base do you want feedback
+                from every year?
+          div class="slider" data-slider-append="%" data-slider-name="responseRate"
+            span.min 25%
+            span.max 75%
+            span.value
+              span
+              span.arrow
+            div
+
+      .frequency
+        .box
+          p Surveys per customer per year
+          ul.switch
+            li.selected
+              a 2
+            li
+              a 4
+
+    section id="bottom"
+
+    script#template type="text/html"
+      #total
+        .box
+          p
+            span.text-lg {{ surveys }}
+            span.text-md surveys
+            span.text-sm 
+              | / quarter
+          p.equals
+            span.text-lg 
+              | =
+          p
+            span.text-super.text-md $
+            span.text-lg {{ cost }}
+            span.text.sm 
+              | / quarter
+
+      #details
+        .box
+          header
+            h2 Program Details
+          p
+            | Surveys are garthered on a per quarter basis.
+              Your cusomter base will be asked for feed back {{ frequency }} times a year.
+          #divide
+            p We devide your customer base into two equal groups
+            .box
+              .group-total
+                p Customer Base
+                div {{ customerBase }} Customers
+              .group-a
+                p Group A
+                div {{ customers }} Customers
+              .group-b
+                p Group B
+                div {{ customers }} Customers
+
+          #schedule
+            p Each customer group is asked for input every six months according to the below schedule
+            ul
+              li.first
+                h3 Q1
+                .group-a Group A
+                .info
+                  | {{ customers }} customers
+                  br
+                  | @ {{ responseRate }}% =
+                  b {{ surveys }} surveys
+              li
+                h3 Q2
+                .group-b Group B
+                .info
+                  | {{ customers }} customers
+                  br
+                  | @ {{ responseRate }}% =
+                  b {{ surveys }} surveys
+              li
+                h3 Q3
+                .group-a Group A
+                .info
+                  | {{ customers }} customers
+                  br
+                  | @ {{ responseRate }}% =
+                  b {{ surveys }} surveys
+              li.last
+                h3 Q4
+                .group-b Group B
+                .info
+                  | {{ customers }} customers
+                  br
+                  | @ {{ responseRate }}% =
+                  b {{ surveys }} surveys
+    footer
