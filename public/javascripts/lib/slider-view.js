@@ -18,30 +18,23 @@ var SliderUI = Backbone.View.extend({
         self.render();
       },
       slide: function(event, ui) {
-        self.model.set({value: ui.value});
-        self.render();
-      },
-      stop: function(event, ui) {
-        self.model.trigger('newValue', ui.value);
+        self.render(ui.value);
       }
     });
 
+    this.el.find('.value').appendTo(this.el.find('.ui-slider-handle'));
+
     this.render();
+    this.el.show();
   },
 
-  render: function() {
-    this.showValueChange();
-    this.lineUpValue();
+  render: function(val) {
+    var value = val || this.control.slider('value');
+    this.showValueChange(value);
   },
 
-  lineUpValue: function() {
-    this.el.find('.value').css({
-      bottom: this.model.percentage() + '%'
-    });
-  },
-
-  showValueChange: function() {
+  showValueChange: function(value) {
     var append = this.el.data('slider-append') || '';
-    this.el.find('.value span').first().text(this.model.get('value') + append);
+    this.el.find('.value span').first().text(value.toNiceString() +  append);
   }
 });

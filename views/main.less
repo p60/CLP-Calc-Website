@@ -24,6 +24,12 @@
   background-image: -o-linear-gradient(top, @top-color, @bottom-color);
 }
 
+.shadow(@value) {
+  -moz-box-shadow: @value;
+  -webkit-box-shadow: @value;
+  box-shadow: @value;
+}
+
 .group(@color) {
   .round(5px);
   .graident(@color, darken(@color, 15%));
@@ -104,6 +110,7 @@ h1 {
 
 .customer-base, .response-rate {
   width: 420px;
+  height: 315px;
   float: left;
   margin: 10px;
 
@@ -126,10 +133,12 @@ h1 {
   }
 
   .slider {
+    display: none;
     width: 50%;
     float:left;
     position: relative;
     margin-bottom: 20px;
+    background: url(../images/ticks.png) no-repeat 95px 0;
 
     .min, .max {
       position: absolute;
@@ -148,21 +157,35 @@ h1 {
     }
 
     .value {
+      .shadow(2px 2px 20px #000);
+      .round(2px);
       position: absolute;
-      bottom: -8.5%;
-      left: 105px;
+      left: 29px;
+      top: -31px;
       width: 60px;
-      padding: 5px;
-      background: #000;
+      padding: 12px;
+      .graident(#3a6b77, darken(#3a6b77, 15%));
       text-align: center;
+      text-decoration: none;
+      color: #fff;
+      font-size: 20px;
+      line-height: 20px;
+
+      /*&:hover { background: #444; */
+        /*span.arrow {*/
+          /*border-right-color: #444;*/
+        /*}*/
+      /*}*/
 
       span.arrow {
         position: absolute;
-        border-color: transparent #000 transparent transparent;
+        border-color: transparent darken(#3a6b77, 8%) transparent transparent;
         border-width: 8px;
         border-style: solid;
         left: -15px;
-        top: 9px;
+        top: 14px;
+
+        &:hover {  }
       }
     }
   }
@@ -296,7 +319,7 @@ h1 {
       top: 118px;
       left: 105px;
       p {
-        .group(#3c6d7a);
+        .group(#d77319);
       }
       div {
         .group-label
@@ -347,7 +370,7 @@ h1 {
       margin: 0 0 15px;
     }
     .group-a {
-      .group(#3c6d7a);
+      .group(#d77319);
       font-size: 14px;
       margin-bottom: 10px;
     }
@@ -370,23 +393,27 @@ footer {
 }
 
 /* JqueryUI slider styles */
-.ui-slider { .round(3px); position: relative; text-align: left; margin:0 0 0 80px; background:#000; border: 0;}
-.ui-slider .ui-slider-handle { .round(3px); position: absolute; background:#333; border:solid 1px #000; z-index: 2; width: 15px; height: 15px; outline: 0;  cursor: default; 
-background-image: linear-gradient(bottom, rgb(51,51,51) 100%, rgb(17,17,17) 0%);
-background-image: -o-linear-gradient(bottom, rgb(51,51,51) 100%, rgb(17,17,17) 0%);
-background-image: -moz-linear-gradient(bottom, rgb(51,51,51) 100%, rgb(17,17,17) 0%);
-background-image: -webkit-linear-gradient(bottom, rgb(51,51,51) 100%, rgb(17,17,17) 0%);
-background-image: -ms-linear-gradient(bottom, rgb(51,51,51) 100%, rgb(17,17,17) 0%);
-
-background-image: -webkit-gradient(
-  linear,
-    left bottom,
-      left top,
-        color-stop(1, rgb(51,51,51)),
-          color-stop(0, rgb(17,17,17))
-          );
+.ui-slider { 
+  .round(5px);
+  position: relative;
+  text-align: left;
+  margin:0 0 0 80px;
+  background:#111;
+  border: solid 1px #000;
 }
-.ui-slider .ui-slider-range { .round(0 0 2px 2px); position: absolute; z-index: 1; font-size: .7em; display: block; border: 0; background-position: 0 0; }
+
+.ui-slider .ui-slider-handle {
+  .round(3px);
+  position: absolute;
+  background:#333;
+  z-index: 2;
+  width: 0px;
+  height: 0px;
+  outline: 0;
+  cursor: default; 
+}
+
+.ui-slider .ui-slider-range { .round(2px); position: absolute; z-index: 1; font-size: .7em; display: block; border: 0; background-position: 0 0; }
 
 .ui-slider-horizontal { height: .8em; }
 .ui-slider-horizontal .ui-slider-handle { top: -.3em; margin-left: -.6em; }
@@ -394,8 +421,8 @@ background-image: -webkit-gradient(
 .ui-slider-horizontal .ui-slider-range-min { left: 0; }
 .ui-slider-horizontal .ui-slider-range-max { right: 0; }
 
-.ui-slider-vertical { width: 7px; height: 200px; }
-.ui-slider-vertical .ui-slider-handle { left: -5px; margin-left: 0; margin-bottom: -8px; }
-.ui-slider-vertical .ui-slider-range { left: 0; width: 100%; border:0; background:#333; }
+.ui-slider-vertical { width: 10px; height: 200px; }
+.ui-slider-vertical .ui-slider-handle { left: 0px; margin-left: 0; margin-bottom: -8px; color: transparent; cursor: pointer;}
+.ui-slider-vertical .ui-slider-range { left: 0; width: 100%; border:0; background:darken(#3a6b77, 8%); }
 .ui-slider-vertical .ui-slider-range-min { bottom: 0; }
 .ui-slider-vertical .ui-slider-range-max { top: 0; }

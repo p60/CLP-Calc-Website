@@ -4,7 +4,7 @@ var PriceView = Backbone.View.extend({
 
   initialize: function() {
     this.template = Handlebars.compile($('#template').html());
-    this.model.bind('showResults', function() {
+    this.model.bind('change', function() {
       this.render()
     }, this);
   },

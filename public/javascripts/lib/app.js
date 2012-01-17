@@ -30,8 +30,8 @@ var calculatorApp = {},
           values = window.location.hash.split('|'),
           sliderOptions = {
             element: sliderEle,
-            min: parseInt(sliderEle.find('.min').text()),
-            max: parseInt(sliderEle.find('.max').text())
+            min: parseInt(sliderEle.find('.min').text().replace(/,/, '')),
+            max: parseInt(sliderEle.find('.max').text().replace(/,/, ''))
           },
           slider,
           sliderView;
@@ -43,11 +43,11 @@ var calculatorApp = {},
       slider = new CLPSlider(sliderOptions);
       sliderView = new SliderUI({ model: slider, el: sliderEle });
 
-      slider.bind('newValue', function(value) {
+      slider.bind('change', function() {
         //Set the value from the slider on to the calculator
         var obj = {},
             att = sliderOptions['element'].data('slider-name');
-        obj[att] = value;
+        obj[att] = this.get('value');
         calc.set(obj);
       });
 
