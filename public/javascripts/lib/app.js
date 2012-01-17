@@ -1,4 +1,5 @@
-var calculatorApp = {};
+var calculatorApp = {},
+    pi = {};
 
 (function($, undefined) {
   var calc;
@@ -65,5 +66,33 @@ var calculatorApp = {};
         }
       });
     }
+  };
+
+  _.extend(pi, {
+    niceNumber: function(num) {
+      var numString = num.toString(),
+          parts = [],
+          i, start, end;
+
+      for(i = numString.length; i > 0; i = i - 3) {
+        start = (i-3 > 0) ? i-3 : 0;
+        end = i;
+        parts.push(numString.slice(start, end));
+      }
+      return parts.reverse().join(',');
+    }
+  });
+
+  Number.prototype.toNiceString = function() {
+    var numString = this.toString(),
+        parts = [],
+        i, start, end;
+
+    for(i = numString.length; i > 0; i = i - 3) {
+      start = (i-3 > 0) ? i-3 : 0;
+      end = i;
+      parts.push(numString.slice(start, end));
+    }
+    return parts.reverse().join(',');
   };
 })(jQuery);

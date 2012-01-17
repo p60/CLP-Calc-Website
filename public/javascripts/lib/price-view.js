@@ -11,11 +11,12 @@ var PriceView = Backbone.View.extend({
 
   render: function() {
     var data = _.extend(this.model.toJSON(), {
-      surveys: this.model.perQuarterSurveySize(),
-      cost: this.model.perQuarterCost(),
-      customers : this.model.perQuarterGroupSize(),
+      surveys: this.model.perQuarterSurveySize().toNiceString(),
+      cost: this.model.perQuarterCost().toNiceString(),
+      customers : this.model.perQuarterGroupSize().toNiceString(),
       detailed: this.model.get('frequency') === 2
     });
+    data.customerBase = data.customerBase.toNiceString();
     this.el.html(this.template(data));
   }
 });
