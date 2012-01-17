@@ -97,7 +97,7 @@ html
           /p
           /  | Surveys are gathered on a per quarter basis.
           /    Your customer base will be asked for feedback {{ frequency }} times a year.
-          | {{#if detailed }}
+          | {{#if detailed}}
           #divide
             p We divide your customer base into two equal groups
             .box
@@ -110,13 +110,28 @@ html
               .group-b
                 p Group B
                 div {{ customers }} Customers
+          | {{/if}}
 
           #schedule
-            p Each customer group is asked for input every six months according to the below schedule
+            p
+              | {{#if detailed}} 
+                  Each customer group
+                {{else}}
+                  Your customer base
+                {{/if}}
+                is asked for input every
+                {{#if detailed}}
+                  six months
+                {{else}}
+                  quarter
+                {{/if}}
+                according to the below schedule
             ul
               li.first
                 h3 Q1
+                | {{#if detailed}}
                 .group-a Group A
+                | {{/if}}
                 .info
                   | {{ customers }} customers
                   br
@@ -124,7 +139,9 @@ html
                   b {{ surveys }} surveys
               li
                 h3 Q2
+                | {{#if detailed}}
                 .group-b Group B
+                | {{/if}}
                 .info
                   | {{ customers }} customers
                   br
@@ -132,7 +149,9 @@ html
                   b {{ surveys }} surveys
               li
                 h3 Q3
+                | {{#if detailed}}
                 .group-a Group A
+                | {{/if}}
                 .info
                   | {{ customers }} customers
                   br
@@ -140,11 +159,12 @@ html
                   b {{ surveys }} surveys
               li.last
                 h3 Q4
+                | {{#if detailed}}
                 .group-b Group B
+                | {{/if}}
                 .info
                   | {{ customers }} customers
                   br
                   | @ {{ responseRate }}% =
                   b {{ surveys }} surveys
-            | {{/if}}
     footer
